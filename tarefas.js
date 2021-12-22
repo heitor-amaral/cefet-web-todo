@@ -80,7 +80,6 @@ campoNovaTarefaNome.addEventListener('keyup', e => {
 document.querySelectorAll('.item-tarefa').forEach(item => {
 	item.addEventListener('click', e => {
 		item.classList.toggle('marcado')
-    console.log({e: e.target.text, item: item})
     tarefas.find(tarefa => tarefa.nome == item.innerHTML).realizada = item.classList.contains('marcado')
 	});
 })
