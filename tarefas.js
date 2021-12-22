@@ -47,9 +47,11 @@ function criarNovaTarefa() {
 
   tarefas.push(tarefaNova);
 
-  tarefaNova.adicionaNaPagina(listaTarefas);
+  const novaTarefaEl = tarefaNova.adicionaNaPagina(listaTarefas);
   campoNovaTarefaNome.value = "";
   campoNovaTarefaNome.focus();
+
+  novaTarefaEl.addEventListener('click', toggleTarefa)
 }
 
 const botaoAdicionar = document.querySelector("#incluir-nova-tarefa");
@@ -77,9 +79,12 @@ campoNovaTarefaNome.addEventListener('keyup', e => {
 
 
 //Ex: 5
+function toggleTarefa(e) {
+  const elemento = e.target;
+  elemento.classList.toggle('marcado')
+  tarefas.find(tarefa => tarefa.nome == elemento.innerHTML).realizada = elemento.classList.contains('marcado')
+}
+
 document.querySelectorAll('.item-tarefa').forEach(item => {
-	item.addEventListener('click', e => {
-		item.classList.toggle('marcado')
-    tarefas.find(tarefa => tarefa.nome == item.innerHTML).realizada = item.classList.contains('marcado')
-	});
+	item.addEventListener('click', toggleTarefa);
 })
